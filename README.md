@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# Multi-step Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create a multi-step form with fields & validation rules.
 
-## Available Scripts
+# Summary
 
-In the project directory, you can run:
+- Each step of the form (except for the last one) must have a Next button.
 
-### `yarn start`
+- Once the user clicks on the Next button, if the fields are filled out correctly (based on the defined validation rules below), they’d go to the next step.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Otherwise, they’d see the respective error message.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Additionally, each step (except for the first one) must have a Back button to let the users go back to the previous step - if they need to edit their input.
 
-### `yarn test`
+- The last step (step 6), should have a dummy Submit button, which simply takes the users to a “Thank You” page (no need to post the form data).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The “Thank You” page should display all the data user has entered in a tabular format. It should also have an Edit button, which takes the user back to beginning of the form, where they can edit their data from Step 1.
 
-### `yarn build`
+- Here are the fields you need to create for each step of the form.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Form Step 1
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Field: A text field with label “Postal Code”, to get user’s postal code - in this format: 0000-000 (Ex: 2190-889)
+Validation rules: required, format=0000-000
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    Buttons: Next
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Form Step 2
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Field: A slider control <input type="range"> which allows the user to select a monetary value between €10,000 and €50,000.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    It would be great if you display the user’s selected value next to the slider.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The slider step should be 500 (10500, 11000, 11500, 12000, …)
 
-## Learn More
+Validation rules: required, number, => €10,000 and <= €50,000
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    Buttons: Next, Back
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Form Step 3
 
-### Code Splitting
+Field: A select box to get the user’s employment status, with these options:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    Employed
+    Self-employed
+    Unemployed
+    Retired
 
-### Analyzing the Bundle Size
+Validation rules: required
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    Buttons: Next, Back
 
-### Making a Progressive Web App
+# Form Step 4
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Field: A group of radio buttons to let the user opt for a free consultation, with these options:
 
-### Advanced Configuration
+    I want a free consultation
+    I don’t want free consultation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Validation rules: required
 
-### Deployment
+    Buttons: Next, Back
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    If the user chooses “I want free consultation”, they will go to step 5 to choose the method of communication; otherwise they’ll go to step 6.
 
-### `yarn build` fails to minify
+    Note: If the user chooses “I don’t need free consultation” and go directly to step 6, the back button on step 6 should take them back to step 4, not 5.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Form Step 5
+
+Field: A group of radio buttons to let the user choose their preferred way of communication - with these options:
+
+    Call me
+    Email me
+
+Validation rules: required
+
+    Buttons: Next, Back
+
+# Form Step 6
+
+This is the last step, and it contains three fields to get the user’s personal information.
+
+Field: Full name
+Validation rules: required, string
+
+Field: Email Address
+Validation rules: required, email
+
+Field: Phone Number
+Validation rules: required, number
+
+Field: A checkbox with this label “I read and agree to the terms and conditions.”
+Validation rules: required to check
+
+    Buttons: Back, Submit
+
+
+# Requirements
+
+1. You can use Vue, Angular, React or any other library/framework you prefer.
+2. You can use Sass or pure CSS to style the form and the page (use your imagination)
+3. The form should store the data (in the browser’s storage) even if the user refreshes or leaves the page.
+4. Display a progress bar at the top of the form to let the users know how many steps are left.
+5. The form should be responsive and acessible across different devices.
+6. Don’t allow the user to submit the form if they haven’t checked the checkbox on Step 6.
+
+# Good to Haves (not mandatory)
+
+On each step, emit a Custom JavaScript Event named viewPage with a simple object like so:
+
+{
+   page: first-page
+}
+
+–
+That’s it!
+Good luck!
