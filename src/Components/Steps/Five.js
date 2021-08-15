@@ -7,7 +7,7 @@ const Five = () => {
   const handleContact = ({ target: { value } }) => setContact(value)
 
   const next = () => {
-    save('Contact', contact)
+    save('Contact', contact || '0')
     document.getElementById('actual-step').innerHTML = 6
     document.getElementById('step-five').style.display = 'none'
     document.getElementById('step-six').style.display = 'flex'

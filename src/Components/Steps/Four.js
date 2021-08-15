@@ -7,20 +7,18 @@ const Four = () => {
 
 
   const next = () => {
-    save('Consultation', consultation)
+    save('Consultation', consultation || '0')
     document.getElementById('step-four').style.display = 'none'
-
-    if(consultation === '0') { // Go to step 5
-      document.getElementById('actual-step').innerHTML = 5
-      document.getElementById('step-five').style.display = 'flex'
-      console.log({ page : 'page-five' })
-    } 
     
     if (consultation === '1') { // Go to step 6
       document.getElementById('actual-step').innerHTML = 6
       document.getElementById('step-six').style.display = 'flex'
       console.log({ page : 'page-six' })
-    }
+    } else { // Go to step 5
+      document.getElementById('actual-step').innerHTML = 5
+      document.getElementById('step-five').style.display = 'flex'
+      console.log({ page : 'page-five' })
+    } 
   }
 
   const back = () => {

@@ -7,7 +7,7 @@ const Three = () => {
   const handleStatus = ({ target: { value } }) => setStatus(value)
 
   const next = () => {
-    save('Status', status)
+    save('Status', status || 'Employed')
     document.getElementById('actual-step').innerHTML = 4
     document.getElementById('step-three').style.display = 'none'
     document.getElementById('step-four').style.display = 'flex'
