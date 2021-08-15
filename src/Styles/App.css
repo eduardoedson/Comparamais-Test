@@ -70,6 +70,7 @@ input[type=text], select {
   color: red;
   font-size: 15px;
   text-decoration: underline;
+  margin-bottom: 10px;
 }
 
 .monetaryValue {

@@ -8,7 +8,7 @@ const One = () => {
   const handlePostalCode = ({ target: { value } }) => setPostalCode(PostalCodeMask(value))
 
   const next = () => {
-    if(postalCode.length < 8) {
+    if(!postalCode || postalCode.length < 8) {
       setErrorPostalCode('Invalid Postal Code.')
     } else {
       save('PostalCode', postalCode)
